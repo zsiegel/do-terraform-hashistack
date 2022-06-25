@@ -1,8 +1,7 @@
 # Hashistack on Digital Ocean
 
 This repo is a playground for creating a full hashistack environment
-with Terraform on Digital ocean. It is not meant to be fully production
-ready but it will attemp to utilize as many best practices as possible.
+with Terraform on Digital ocean.
 
 - [x] Nomad cluster
 - [ ] Consul cluster
