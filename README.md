@@ -1,11 +1,11 @@
 # Hashistack on Digital Ocean
 
-This repo is a playground for creating a full hashistack environment
+This repo is a playground for creating a full Hashistack environment
 with Terraform on Digital ocean.
 
-- [x] Nomad cluster
-- [ ] Consul cluster
-- [ ] Vault cluster
+- [x] [Nomad](https://www.nomadproject.io) cluster
+- [ ] [Consul](https://www.consul.io) cluster
+- [ ] [Vault](https://www.vaultproject.io) cluster
 
 # Running
 
