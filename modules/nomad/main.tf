@@ -76,7 +76,9 @@ resource "digitalocean_droplet" "server" {
 
   provisioner "remote-exec" {
     inline = [
+      # Enable the nomad service on boot
       "systemctl enable nomad.service",
+      # Start the nomad service
       "systemctl start nomad.service"
     ]
   }
