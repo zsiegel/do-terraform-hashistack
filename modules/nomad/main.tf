@@ -16,11 +16,14 @@ variable "node_size" {}
 variable "tag" {}
 variable "vpc_id" {}
 
+resource "random_id" "gossip_key" {
+  byte_length = 32
+}
+
 resource "digitalocean_ssh_key" "default" {
   name       = "nomad-ssh-key"
   public_key = file(var.ssh_key)
 }
-
 
 resource "digitalocean_droplet" "server" {
   count     = var.cluster_size
@@ -32,6 +35,14 @@ resource "digitalocean_droplet" "server" {
   tags      = [var.tag]
   vpc_uuid  = var.vpc_id
   user_data = file("${path.module}/config/cloud-init")
+
+  # Wait for cloud-init to finish (see user_data above)
+  # https://github.com/hashicorp/terraform/issues/4668#issuecomment-419575242
+  provisioner "remote-exec" {
+    inline = [
+      "cloud-init status --wait",
+    ]
+  }
 
   connection {
     type        = "ssh"
@@ -50,11 +61,12 @@ resource "digitalocean_droplet" "server" {
       # 
       # Example: ssh -N -L 4646:{PRIVATE_IP}:4646 root@{PUBLIC_IP}
       bind_addr    = self.ipv4_address_private
+      gossip_key   = random_id.gossip_key.b64_std
       join_addr    = digitalocean_droplet.server.0.ipv4_address_private
       datacenter   = var.datacenter
       cluster_size = var.cluster_size
     })
-    destination = "/opt/nomad.d/nomad.hcl"
+    destination = "/etc/nomad.d/nomad.hcl"
   }
 
   provisioner "file" {
@@ -62,14 +74,10 @@ resource "digitalocean_droplet" "server" {
     destination = "/etc/systemd/system/nomad.service"
   }
 
-  # Wait for cloud-init to finish (see user_data above) 
-  # Start nomad service
-  # TODO move this all to cloud-init?
   provisioner "remote-exec" {
     inline = [
-      "cloud-init status --wait",
       "systemctl enable nomad.service",
-      "systemctl start nomad.service",
+      "systemctl start nomad.service"
     ]
   }
 

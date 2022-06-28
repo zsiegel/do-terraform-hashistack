@@ -9,4 +9,4 @@ sudo apt install -y wget unzip
 wget -q -O /tmp/nomad.zip https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_amd64.zip
 unzip /tmp/nomad.zip -d /usr/bin
 
-mkdir -p /opt/nomad.d /opt/nomad
+mkdir -p /etc/nomad.d /opt/nomad

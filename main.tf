@@ -16,8 +16,8 @@ module "vpc" {
   region = var.region
 }
 
-module "droplet" {
-  source          = "./modules/droplet"
+module "nomad" {
+  source          = "./modules/nomad"
   region          = var.region
   node_size       = var.node_size
   datacenter      = var.datacenter

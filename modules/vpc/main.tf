@@ -10,7 +10,7 @@ terraform {
 variable "region" {}
 
 resource "digitalocean_vpc" "vpc" {
-  name   = "nomad-vpc"
+  name   = "hashistack-vpc"
   region = var.region
 }
 

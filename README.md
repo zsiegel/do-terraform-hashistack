@@ -4,6 +4,9 @@ This repo is a playground for creating a full Hashistack environment
 with Terraform on Digital ocean.
 
 - [x] [Nomad](https://www.nomadproject.io) cluster
+  - [x] cloud-init
+  - [x] gossip encryption
+  - [ ] mutual tls
 - [ ] [Consul](https://www.consul.io) cluster
 - [ ] [Vault](https://www.vaultproject.io) cluster
 

@@ -7,7 +7,7 @@ datacenter = "${datacenter}"
 server {
   enabled = true
   bootstrap_expect = ${cluster_size}
-
+  encrypt = "${gossip_key}"
   server_join {
     retry_join = ["${join_addr}"]
   }
