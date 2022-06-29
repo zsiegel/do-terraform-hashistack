@@ -42,6 +42,6 @@ resource "local_file" "client_cert" {
 
 resource "local_file" "client_key" {
   content  = tls_private_key.client_key.private_key_pem
-  filename = "${var.certs_dir}/client/client-private-key.pem"
+  filename = "${var.certs_dir}/client/client-key.pem"
 }
 

@@ -25,5 +25,5 @@ resource "local_file" "ca_cert" {
 
 resource "local_file" "ca_key" {
   content  = tls_private_key.ca_key.private_key_pem
-  filename = "${var.certs_dir}/ca/ca-private-key.pem"
+  filename = "${var.certs_dir}/ca/ca-key.pem"
 }

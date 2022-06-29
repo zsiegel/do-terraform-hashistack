@@ -33,3 +33,4 @@ local.tfvars
 
 /tmp
 /gen
+.DS_Store
