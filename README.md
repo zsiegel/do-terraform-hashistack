@@ -9,6 +9,8 @@ with Terraform on Digital ocean.
   - [x] mutual tls
 - [ ] [Consul](https://www.consul.io) cluster
 - [ ] [Vault](https://www.vaultproject.io) cluster
+- [ ] Add firewall to block all incoming public traffic except SSH
+  - [ ] Consider a bastion host
 
 # Running
 
