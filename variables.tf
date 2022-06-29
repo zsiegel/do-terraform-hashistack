@@ -42,3 +42,9 @@ variable "certs_dir" {
   type    = string
   default = "./gen/certs"
 }
+
+variable "certificate_validity" {
+  description = "The number of hours the certificates are valid for. Defaults to 10 years."
+  type        = number
+  default     = 365 * 24 * 10
+}

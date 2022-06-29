@@ -11,4 +11,4 @@ variable "common_name" {}
 variable "organization" {}
 variable "certs_dir" {}
 variable "region" {}
-
+variable "certificate_validity" {}

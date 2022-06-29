@@ -8,7 +8,7 @@ resource "tls_self_signed_cert" "ca_cert" {
   private_key_pem   = tls_private_key.ca_key.private_key_pem
   is_ca_certificate = true
 
-  validity_period_hours = 365 * 24 * 10
+  validity_period_hours = var.certificate_validity
 
   subject {
     common_name  = var.common_name

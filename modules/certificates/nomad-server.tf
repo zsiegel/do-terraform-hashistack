@@ -25,7 +25,7 @@ resource "tls_locally_signed_cert" "server_signed_cert" {
   ca_private_key_pem = tls_private_key.ca_key.private_key_pem
   ca_cert_pem        = tls_self_signed_cert.ca_cert.cert_pem
 
-  validity_period_hours = 3600
+  validity_period_hours = var.certificate_validity
   allowed_uses          = ["key_encipherment", "digital_signature", "server_auth", "client_auth"]
 }
 

@@ -12,11 +12,12 @@ provider "digitalocean" {
 }
 
 module "certificates" {
-  source       = "./modules/certificates"
-  common_name  = var.common_name
-  organization = var.organization
-  certs_dir    = var.certs_dir
-  region       = var.region
+  source               = "./modules/certificates"
+  common_name          = var.common_name
+  organization         = var.organization
+  certs_dir            = var.certs_dir
+  region               = var.region
+  certificate_validity = var.certificate_validity
 }
 
 module "vpc" {
