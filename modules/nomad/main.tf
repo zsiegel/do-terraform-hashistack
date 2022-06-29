@@ -4,9 +4,18 @@ terraform {
       source  = "digitalocean/digitalocean"
       version = "~> 2.20.0"
     }
+    local = {
+      source  = "hashicorp/local"
+      version = "~> 2.2.3"
+    }
   }
 }
 
+variable "ca_cert_path" {}
+variable "server_cert" {}
+variable "server_key" {}
+variable "client_cert" {}
+variable "client_key" {}
 variable "ssh_key" {}
 variable "ssh_private_key" {}
 variable "cluster_size" {}
@@ -27,7 +36,7 @@ resource "digitalocean_ssh_key" "default" {
 
 resource "digitalocean_droplet" "server" {
   count     = var.cluster_size
-  name      = "nomad-cluster-${count.index + 1}"
+  name      = "nomad-server-${count.index + 1}"
   image     = "debian-11-x64"
   region    = var.region
   size      = var.node_size
@@ -65,10 +74,30 @@ resource "digitalocean_droplet" "server" {
       join_addr    = digitalocean_droplet.server.0.ipv4_address_private
       datacenter   = var.datacenter
       cluster_size = var.cluster_size
+      region       = var.region
     })
     destination = "/etc/nomad.d/nomad.hcl"
   }
 
+  # Copy over the ca certificate for TLS
+  provisioner "file" {
+    content     = file(var.ca_cert_path)
+    destination = "/etc/nomad.d/ca.pem"
+  }
+
+  # Copy over the server certificate for TLS
+  provisioner "file" {
+    content     = file(var.server_cert)
+    destination = "/etc/nomad.d/server.pem"
+  }
+
+  # Copy over the server key for TLS
+  provisioner "file" {
+    content     = file(var.server_key)
+    destination = "/etc/nomad.d/server-key.pem"
+  }
+
+  # Copy over the systemd config
   provisioner "file" {
     content     = file("${path.module}/config/nomad.service")
     destination = "/etc/systemd/system/nomad.service"
@@ -86,6 +115,10 @@ resource "digitalocean_droplet" "server" {
   depends_on = [
     digitalocean_ssh_key.default
   ]
+}
+
+output "bind_addr" {
+  value = digitalocean_droplet.server.server.0.ipv4_address_private
 }
 
 output "servers" {

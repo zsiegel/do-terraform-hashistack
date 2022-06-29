@@ -27,3 +27,18 @@ variable "node_size" {
   type        = string
   default     = "s-4vcpu-8gb-amd"
 }
+
+variable "organization" {
+  type    = string
+  default = "My Organization Inc."
+}
+
+variable "common_name" {
+  type    = string
+  default = "example.com"
+}
+
+variable "certs_dir" {
+  type    = string
+  default = "./gen/certs"
+}

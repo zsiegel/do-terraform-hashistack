@@ -30,3 +30,6 @@ override.tf.json
 .terraform.lock.hcl
 zsiegel.tfvars
 local.tfvars
+
+/tmp
+/gen
