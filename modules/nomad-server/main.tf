@@ -14,8 +14,6 @@ terraform {
 variable "ca_cert_path" {}
 variable "server_cert" {}
 variable "server_key" {}
-variable "client_cert" {}
-variable "client_key" {}
 variable "ssh_key" {}
 variable "ssh_private_key" {}
 variable "cluster_size" {}

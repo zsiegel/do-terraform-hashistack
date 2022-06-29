@@ -38,6 +38,4 @@ module "nomad-server" {
   ca_cert_path    = module.certificates.ca_cert_path
   server_cert     = module.certificates.server_cert_path
   server_key      = module.certificates.server_key_path
-  client_cert     = module.certificates.client_cert_path
-  client_key      = module.certificates.client_key_path
 }
