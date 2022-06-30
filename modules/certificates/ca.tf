@@ -15,7 +15,8 @@ resource "tls_self_signed_cert" "ca_cert" {
     organization = var.organization
   }
 
-  allowed_uses = ["key_encipherment", "digital_signature", "cert_signing"]
+  set_subject_key_id = true
+  allowed_uses       = ["key_encipherment", "digital_signature", "cert_signing"]
 }
 
 resource "local_file" "ca_cert" {

@@ -1,0 +1,21 @@
+#cloud-config
+package_upgrade: true
+packages:
+  - wget
+  - docker
+  - unzip
+
+runcmd:
+  - export CONSUL_VERSION="1.12.2"
+  - export NOMAD_VERSION="1.3.1"
+  - mkdir -p /run/hashicorp
+  - wget -q -O /run/hashicorp/consul-${CONSUL_VERSION}.zip https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_amd64.zip
+  - unzip /run/hashicorp/consul-${CONSUL_VERSION}.zip -d /usr/bin
+  - wget -q -O /run/hashicorp/nomad.zip https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_amd64.zip
+  - unzip /run/hashicorp/nomad-${NOMAD_VERSION}.zip -d /usr/bin
+  - chmod +x /usr/bin/consul
+  - chmod +x /usr/bin/nomad
+  - mkdir -p /etc/consul.d /opt/consul
+  - mkdir -p /etc/nomad.d /opt/nomad
+  - chmod 700 /etc/consul.d /opt/consul
+  - chmod 700 /etc/nomad.d /opt/nomad

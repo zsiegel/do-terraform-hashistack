@@ -20,7 +20,7 @@ variable "cluster_size" {}
 variable "datacenter" {}
 variable "region" {}
 variable "node_size" {}
-variable "tag" {}
+variable "tags" {}
 variable "vpc_id" {}
 
 resource "random_id" "gossip_key" {
@@ -39,7 +39,7 @@ resource "digitalocean_droplet" "server" {
   region    = var.region
   size      = var.node_size
   ssh_keys  = [digitalocean_ssh_key.default.fingerprint]
-  tags      = [var.tag]
+  tags      = var.tags
   vpc_uuid  = var.vpc_id
   user_data = file("${path.module}/config/cloud-init")
 
