@@ -18,6 +18,8 @@ module "certificates" {
   certs_dir            = var.certs_dir
   region               = var.region
   certificate_validity = var.certificate_validity
+  datacenter           = var.datacenter
+  cluster_size         = var.cluster_size
 }
 
 # module "vpc" {

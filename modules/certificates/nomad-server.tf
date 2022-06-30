@@ -6,7 +6,7 @@ resource "tls_private_key" "server_key" {
 
 resource "local_file" "server_cert_file" {
   content  = tls_private_key.server_key.private_key_pem
-  filename = "${var.certs_dir}/server/server-private-key.pem"
+  filename = "${var.certs_dir}/nomad/server/server-private-key.pem"
 }
 
 resource "tls_cert_request" "server_cert_request" {
@@ -32,18 +32,18 @@ resource "tls_locally_signed_cert" "server_signed_cert" {
 }
 
 
-resource "local_file" "server_cert_csr" {
-  content  = tls_cert_request.server_cert_request.cert_request_pem
-  filename = "${var.certs_dir}/server/server-csr.pem"
-}
+# resource "local_file" "server_cert_csr" {
+#   content  = tls_cert_request.server_cert_request.cert_request_pem
+#   filename = "${var.certs_dir}/nomad/server/server-csr.pem"
+# }
 
 resource "local_file" "server_cert" {
   content  = tls_locally_signed_cert.server_signed_cert.cert_pem
-  filename = "${var.certs_dir}/server/server-cert.pem"
+  filename = "${var.certs_dir}/nomad/server/server-cert.pem"
 }
 
 resource "local_file" "server_key" {
   content  = tls_private_key.server_key.private_key_pem
-  filename = "${var.certs_dir}/server/server-key.pem"
+  filename = "${var.certs_dir}/nomad/server/server-key.pem"
 }
 

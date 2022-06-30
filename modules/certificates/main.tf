@@ -8,7 +8,10 @@ terraform {
 }
 
 variable "common_name" {}
+variable "datacenter" {}
 variable "organization" {}
 variable "certs_dir" {}
 variable "region" {}
 variable "certificate_validity" {}
+variable "cluster_size" {}
+
